@@ -18,7 +18,7 @@ This channel (ab)uses unsafe techniques, use with caution.
 
 ## Usage
 
-```
+```go
 package main
 
 import (
