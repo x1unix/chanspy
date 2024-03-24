@@ -2,6 +2,9 @@
 
 > Go Channel Spy
 
+[![Goreportcard](https://goreportcard.com/badge/github.com/x1unix/chanspy)](https://goreportcard.com/report/github.com/x1unix/chanspy)
+[![Go Reference](https://pkg.go.dev/badge/github.com/x1unix/chanspy.svg)](https://pkg.go.dev/github.com/x1unix/chanspy)
+
 This module contains helpers for Go channel types like:
 
 * Checking if channel is closed without read.
