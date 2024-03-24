@@ -28,13 +28,15 @@ import (
 )
 
 func main() {
+    // This is a fast way to check if channel is closed without block.
+    // Use chanspy.ValueOf(ch, chanspy.WithLock) for thread-safe way.
     ch := make(chan int)
     fmt.Println(chanspy.IsClosed(ch)) // Prints: false
 
     close(ch)
-    fmt.Println(chanspy.IsClosed(ch)) // Prints: true 
+    fmt.Println(chanspy.IsClosed(ch)) // Prints: true
 }
 ```
 
-See [examples](./examples).
+See [examples](./example_test.go) for more details.
 
