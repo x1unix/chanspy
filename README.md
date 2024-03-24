@@ -13,7 +13,7 @@ This module contains helpers for Go channel types like:
 
 ## Disclaimer
 
-This channel (ab)uses unsafe techniques, use with caution.
+This package (ab)uses unsafe techniques, use with caution.
 
 > I'm not responsible for broken deployments, segfaults, thermonuclear war, or you getting fired because undefined behavior in the code led to a company going bankrupt.
 > Please do some research if you have any concerns about features included in this package before using it!
