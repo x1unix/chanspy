@@ -90,8 +90,3 @@ func FromPtr(ptr unsafe.Pointer, sync bool) Chan {
 	hChanPtr := (**hchan)(ptr)
 	return Chan{hChan: *hChanPtr, sync: sync}
 }
-
-//func ValueOf[T any](ch chan T) Chan {
-//	hChan := (*hchan)(*(*unsafe.Pointer)(unsafe.Pointer(&ch)))
-//	return Chan{hChan: hChan}
-//}
