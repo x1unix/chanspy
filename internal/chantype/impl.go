@@ -22,6 +22,14 @@ func (c Chan) Closed() bool {
 	return c.hChan.closed != 0
 }
 
+func (c Chan) Locked() bool {
+	if c.hChan == nil {
+		return false
+	}
+
+	return c.hChan.lock.key != 0
+}
+
 func (c Chan) Data() unsafe.Pointer {
 	if c.hChan == nil {
 		return nil

@@ -55,6 +55,23 @@ func TestChan(t *testing.T) {
 				r.True(c.Closed())
 			},
 		},
+		"locked": {
+			newChan: func() chan int {
+				ch := make(chan int, 1)
+
+				// Channel lock is initialized on initial write.
+				ch <- 42
+				return ch
+			},
+			check: func(r *require.Assertions, c Chan) {
+				r.True(c.Locked())
+			},
+		},
+		"unlocked": {
+			check: func(r *require.Assertions, c Chan) {
+				r.False(c.Locked())
+			},
+		},
 		"buffered": {
 			newChan: func() chan int {
 				return make(chan int, 10)

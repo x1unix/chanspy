@@ -9,6 +9,13 @@ type Chan interface {
 	// Closed returns true if a channel is closed.
 	Closed() bool
 
+	// Locked is true if channel lock is active.
+	//
+	// Lock is active when any write operation is performed on a channel at the same goroutine.
+	//
+	// See: https://github.com/golang/go/blob/master/src/runtime/chan.go#L52
+	Locked() bool
+
 	// Data returns a pointer to a channel buffer.
 	Data() unsafe.Pointer
 

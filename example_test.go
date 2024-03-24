@@ -22,10 +22,11 @@ func ExampleValueOf() {
 	ch <- 4
 	defer close(ch)
 
+	// c.Locked() will be true as channel has active write operation in this goroutine.
 	c := chanspy.ValueOf(ch)
 	fmt.Printf(
-		"Regular: IsClosed=%t Len=%d Cap=%d\n",
-		c.Closed(), c.Len(), c.Cap(),
+		"Regular: IsClosed=%t Locked=%t Len=%d Cap=%d\n",
+		c.Closed(), c.Locked(), c.Len(), c.Cap(),
 	)
 
 	// Thread-safe access.
@@ -33,17 +34,18 @@ func ExampleValueOf() {
 	// Useful for concurrent access.
 	done := make(chan struct{})
 	go func() {
+		// c.Locked() is false as we're in a different goroutine.
 		c := chanspy.ValueOf(ch, chanspy.WithLock)
 		_ = <-ch
 		_ = <-ch
 		fmt.Printf(
-			"WithLock: IsClosed=%t Len=%d Cap=%d\n",
-			c.Closed(), c.Len(), c.Cap(),
+			"WithLock: IsClosed=%t Locked=%t Len=%d Cap=%d\n",
+			c.Closed(), c.Locked(), c.Len(), c.Cap(),
 		)
 		done <- struct{}{}
 	}()
 	<-done
 	// Output:
-	// Regular: IsClosed=false Len=4 Cap=10
-	// WithLock: IsClosed=false Len=2 Cap=10
+	// Regular: IsClosed=false Locked=true Len=4 Cap=10
+	// WithLock: IsClosed=false Locked=false Len=2 Cap=10
 }
